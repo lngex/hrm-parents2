@@ -13,6 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>hrm-eureka-service-2010</module>
+        <module>hrm-config-server-1010</module>
+        <module>hrm-zuul-server-1030</module>
     </modules>
 
     <properties>
