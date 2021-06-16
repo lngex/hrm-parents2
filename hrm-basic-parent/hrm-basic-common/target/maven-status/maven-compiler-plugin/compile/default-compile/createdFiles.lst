@@ -1,0 +1,8 @@
+cn\lngex\common\domain\vipuser\service\IVipUserService.class
+cn\lngex\VipUserApp.class
+cn\lngex\common\domain\vipuser\service\impl\VipUserServiceImpl.class
+cn\lngex\common\domain\vipuser\mapper\VipUserMapper.class
+cn\lngex\common\domain\vipuser\query\VipUserQuery.class
+cn\lngex\common\domain\vipuser\controller\VipUserController.class
+cn\lngex\common\domain\vipuser\domain\VipUser.class
+cn\lngex\common\query\BaseQuery.class
