@@ -1,0 +1,13 @@
+cn\lngex\system\domain\TenantType.class
+cn\lngex\system\domain\Department.class
+cn\lngex\system\query\TenantTypeQuery.class
+cn\lngex\system\domain\Employee.class
+cn\lngex\system\query\EmployeeQuery.class
+cn\lngex\system\domain\OperLog.class
+cn\lngex\system\query\TenantQuery.class
+cn\lngex\system\query\OperLogQuery.class
+cn\lngex\system\domain\Tenant.class
+cn\lngex\system\query\DepartmentQuery.class
+cn\lngex\system\domain\Config.class
+cn\lngex\system\query\ConfigQuery.class
+cn\lngex\system\vo\EnteringVo.class

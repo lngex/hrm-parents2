@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 
 /**
@@ -30,7 +32,8 @@ public class Tenant extends Model<Tenant> {
     @TableField("company_num")
     private String companyNum;
     @TableField("register_time")
-    private Date registerTime;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
+    private Date registerTime = new Date();
     /**
      * 0待审核，1 审核通过 ， 2审核失败
      */
@@ -40,77 +43,112 @@ public class Tenant extends Model<Tenant> {
     @TableField("admin_id")
     private Long adminId;
 
+    @TableField(exist = false)
+    private TenantType type;
+
+    @TableField(exist = false)
+    private Employee admin;
+
+    public Tenant() {
+    }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Tenant setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Long getTenantTypeId() {
         return tenantTypeId;
     }
 
-    public void setTenantTypeId(Long tenantTypeId) {
+    public Tenant setTenantTypeId(Long tenantTypeId) {
         this.tenantTypeId = tenantTypeId;
+        return this;
     }
 
     public String getCompanyName() {
         return companyName;
     }
 
-    public void setCompanyName(String companyName) {
+    public Tenant setCompanyName(String companyName) {
         this.companyName = companyName;
+        return this;
     }
 
     public String getCompanyNum() {
         return companyNum;
     }
 
-    public void setCompanyNum(String companyNum) {
+    public Tenant setCompanyNum(String companyNum) {
         this.companyNum = companyNum;
+        return this;
     }
 
     public Date getRegisterTime() {
         return registerTime;
     }
 
-    public void setRegisterTime(Date registerTime) {
+    public Tenant setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;
+        return this;
     }
 
     public Integer getState() {
         return state;
     }
 
-    public void setState(Integer state) {
+    public Tenant setState(Integer state) {
         this.state = state;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public Tenant setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     public String getLogo() {
         return logo;
     }
 
-    public void setLogo(String logo) {
+    public Tenant setLogo(String logo) {
         this.logo = logo;
+        return this;
     }
 
     public Long getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(Long adminId) {
+    public Tenant setAdminId(Long adminId) {
         this.adminId = adminId;
+        return this;
+    }
+
+    public TenantType getType() {
+        return type;
+    }
+
+    public Tenant setType(TenantType type) {
+        this.type = type;
+        return this;
+    }
+
+    public Employee getAdmin() {
+        return admin;
+    }
+
+    public Tenant setAdmin(Employee admin) {
+        this.admin = admin;
+        return this;
     }
 
     @Override

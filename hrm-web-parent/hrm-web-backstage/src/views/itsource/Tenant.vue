@@ -31,7 +31,10 @@
 			<el-table-column prop="address" label="公司地址">
 			</el-table-column>
 			<el-table-column prop="logo" label="LOGO">
-
+			</el-table-column>
+			<el-table-column prop="type.name" label="机构类型">
+			</el-table-column>
+			<el-table-column prop="admin.username" label="管理员">
 			</el-table-column>
 			<el-table-column label="操作" width="150">
 				<template scope="scope">
@@ -80,8 +83,8 @@
 				//分页查询
                 this.$http.post("/system/tenant/list",para) //$.Post(.....)
                     .then(result=>{
-                        this.total = result.data.total;
-                        this.tenants = result.data.rows;
+                        this.total = result.data.resultObj.total;
+                        this.tenants = result.data.resultObj.rows;
                         this.listLoading = false;  //关闭加载圈
                     });
 				/* 查询所有

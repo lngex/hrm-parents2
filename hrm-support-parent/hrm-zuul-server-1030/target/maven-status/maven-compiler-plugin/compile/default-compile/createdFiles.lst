@@ -1,1 +1,4 @@
+cn\lngex\config\SwaggerConfig.class
 cn\lngex\ZuulApp.class
+cn\lngex\config\DocumentationConfig.class
+cn\lngex\config\GlobalCorsConfig.class

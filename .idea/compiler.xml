@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="hrm-basic-util" />
+        <module name="hrm-auth-common" />
         <module name="hrm-system-common" />
         <module name="hrm-test-mybatisplus" />
         <module name="hrm-eureka-service-2010" />
         <module name="hrm-basic-common" />
         <module name="hrm-system-service" />
+        <module name="hrm-auth-service" />
         <module name="hrm-config-server-1010" />
         <module name="hrm-zuul-server-1030" />
       </profile>
@@ -19,6 +21,9 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="hrm-auth-common" options="-parameters" />
+      <module name="hrm-auth-parent" options="-parameters" />
+      <module name="hrm-auth-service" options="-parameters" />
       <module name="hrm-basic-common" options="-parameters" />
       <module name="hrm-basic-parent" options="-parameters" />
       <module name="hrm-basic-util" options="-parameters" />

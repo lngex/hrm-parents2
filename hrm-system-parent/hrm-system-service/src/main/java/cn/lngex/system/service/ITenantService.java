@@ -1,6 +1,9 @@
 package cn.lngex.system.service;
 
 import cn.lngex.system.domain.Tenant;
+import cn.lngex.system.query.TenantQuery;
+import cn.lngex.system.vo.EnteringVo;
+import cn.lngex.utils.AjaxResult;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -13,4 +16,12 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ITenantService extends IService<Tenant> {
 
+    AjaxResult queryList(TenantQuery query);
+
+    /**
+     * 商家入驻
+     * @param enteringVo
+     * @return
+     */
+    AjaxResult entering(EnteringVo enteringVo);
 }

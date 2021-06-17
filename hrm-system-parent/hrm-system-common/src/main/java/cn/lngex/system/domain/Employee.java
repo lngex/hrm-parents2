@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 
 /**
@@ -48,7 +50,8 @@ public class Employee extends Model<Employee> {
      * 创建时间
      */
     @TableField("input_time")
-    private Date inputTime;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
+    private Date inputTime = new Date();
     /**
      * 状态：0正常，1锁定，2注销
      */
@@ -71,109 +74,121 @@ public class Employee extends Model<Employee> {
     @TableField("login_id")
     private Long loginId;
 
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Employee setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public Employee setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public Employee setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public String getRealName() {
         return realName;
     }
 
-    public void setRealName(String realName) {
+    public Employee setRealName(String realName) {
         this.realName = realName;
+        return this;
     }
 
     public String getTel() {
         return tel;
     }
 
-    public void setTel(String tel) {
+    public Employee setTel(String tel) {
         this.tel = tel;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Employee setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public Date getInputTime() {
         return inputTime;
     }
 
-    public void setInputTime(Date inputTime) {
+    public Employee setInputTime(Date inputTime) {
         this.inputTime = inputTime;
+        return this;
     }
 
     public Integer getState() {
         return state;
     }
 
-    public void setState(Integer state) {
+    public Employee setState(Integer state) {
         this.state = state;
+        return this;
     }
 
     public Long getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(Long deptId) {
+    public Employee setDeptId(Long deptId) {
         this.deptId = deptId;
+        return this;
     }
 
     public Long getTenantId() {
         return tenantId;
     }
 
-    public void setTenantId(Long tenantId) {
+    public Employee setTenantId(Long tenantId) {
         this.tenantId = tenantId;
+        return this;
     }
 
     public Integer getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public Employee setType(Integer type) {
         this.type = type;
+        return this;
     }
 
     public String getSalt() {
         return salt;
     }
 
-    public void setSalt(String salt) {
+    public Employee setSalt(String salt) {
         this.salt = salt;
+        return this;
     }
 
     public Long getLoginId() {
         return loginId;
     }
 
-    public void setLoginId(Long loginId) {
+    public Employee setLoginId(Long loginId) {
         this.loginId = loginId;
+        return this;
     }
 
     @Override

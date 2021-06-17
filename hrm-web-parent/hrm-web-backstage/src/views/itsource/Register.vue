@@ -173,14 +173,14 @@
         },
         methods: {
             getTenantTypes(){
-                this.$http.get("/system/tenantType/list") //$.Post(.....)
+                this.$http.post("/system/tenantType/list",{}) //$.Post(.....)
                     .then(result=>{
-                        this.tenantTypes = result.data;
+                        this.tenantTypes = result.data.rows;
                     });
             },
             getMeals(){
-              this.$http.get("/system/meal/list").then(res=>{
-                  this.meals = res.data;
+              this.$http.post("/auth/meal/list",{}).then(res=>{
+                  this.meals = res.data.rows;
               });
             },
             selectAdrressConfirm(){
@@ -278,7 +278,7 @@
                     }
                 })
             }
-        }
+        },
     }
 
 </script>

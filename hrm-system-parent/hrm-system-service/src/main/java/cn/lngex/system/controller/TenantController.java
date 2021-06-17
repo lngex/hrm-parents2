@@ -3,6 +3,7 @@ package cn.lngex.system.controller;
 import cn.lngex.system.domain.Tenant;
 import cn.lngex.system.query.TenantQuery;
 import cn.lngex.system.service.ITenantService;
+import cn.lngex.system.vo.EnteringVo;
 import cn.lngex.utils.AjaxResult;
 import cn.lngex.utils.PageList;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -80,10 +81,21 @@ public class TenantController {
     * @return PageList 分页对象
     */
     @PostMapping("/list")
-    public PageList<Tenant> json(@RequestBody TenantQuery query)
+    public AjaxResult json(@RequestBody TenantQuery query)
     {
-        Page<Tenant> page = new Page<Tenant>(query.getPage(),query.getRows());
+        /*Page<Tenant> page = new Page<Tenant>(query.getPage(),query.getRows());
         page = tenantService.selectPage(page);
-        return new PageList<Tenant>(page.getTotal(),page.getRecords());
+        return new PageList<Tenant>(page.getTotal(),page.getRecords());*/
+        return tenantService.queryList(query);
+    }
+
+    /**
+     * 商家入驻
+     * @param enteringVo
+     * @return
+     */
+    @PostMapping("/entering")
+    public AjaxResult entering(@RequestBody EnteringVo enteringVo){
+        return tenantService.entering(enteringVo);
     }
 }
