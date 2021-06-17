@@ -11,10 +11,8 @@
     <modules>
         <module>hrm-support-parent</module>
         <module>hrm-basic-parent</module>
-        <module>hrm-basic-parent/hrm-basic-util</module>
-        <module>hrm-basic-parent/hrm-basic-common</module>
-        <module>hrm-test</module>
-        <module>hrm-test/hrm-test-mybatisplus</module>
+        <module>hrm-test-parent</module>
+        <module>hrm-system-parent</module>
     </modules>
 
     <properties>
@@ -26,6 +24,7 @@
         <groupId> org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.0.5.RELEASE</version>
+
     </parent>
 
     <!--管理Spring Cloud-->
@@ -38,6 +37,9 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+
+
         </dependencies>
     </dependencyManagement>
 
@@ -46,6 +48,17 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
         </dependency>
     </dependencies>
 

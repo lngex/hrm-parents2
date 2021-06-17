@@ -7,12 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="hrm-basic-util" />
+        <module name="hrm-system-common" />
         <module name="hrm-test-mybatisplus" />
         <module name="hrm-eureka-service-2010" />
         <module name="hrm-basic-common" />
+        <module name="hrm-system-service" />
         <module name="hrm-config-server-1010" />
-        <module name="hrm-basic-parent" />
-        <module name="hrm-test" />
         <module name="hrm-zuul-server-1030" />
       </profile>
     </annotationProcessing>
@@ -26,8 +26,11 @@
       <module name="hrm-eureka-service-2010" options="-parameters" />
       <module name="hrm-parent" options="-parameters" />
       <module name="hrm-support-parent" options="-parameters" />
-      <module name="hrm-test" options="-parameters" />
+      <module name="hrm-system-common" options="-parameters" />
+      <module name="hrm-system-parent" options="-parameters" />
+      <module name="hrm-system-service" options="-parameters" />
       <module name="hrm-test-mybatisplus" options="-parameters" />
+      <module name="hrm-test-parent" options="-parameters" />
       <module name="hrm-zuul-server-1030" options="-parameters" />
     </option>
   </component>
