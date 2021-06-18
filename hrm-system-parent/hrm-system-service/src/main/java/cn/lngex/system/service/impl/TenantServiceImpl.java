@@ -51,7 +51,7 @@ public class TenantServiceImpl extends ServiceImpl<TenantMapper, Tenant> impleme
     /**
      * 机构入驻
      * @param enteringVo
-     * @return
+     * @return AjaxResult
      */
     @Override
     public AjaxResult entering(EnteringVo enteringVo) {
