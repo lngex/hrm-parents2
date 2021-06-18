@@ -18,6 +18,9 @@
         <module name="hrm-zuul-server-1030" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hrm-basic-common" target="8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
