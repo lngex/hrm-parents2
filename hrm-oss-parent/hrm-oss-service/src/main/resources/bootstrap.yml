@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    config:
+      name: application-oss #gitee上面名称
+      profile: dev #环境
+      label: master #分支
+      uri: http://127.0.0.1:1010 #配置服务器
+      bus: #这行代码很重要，根据官方定义的标准来的 ,就是为了产生一个bus.id
+        id: ${spring.application.name}:${spring.cloud.config.profile}:${random.value}
+

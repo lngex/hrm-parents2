@@ -356,7 +356,7 @@
 				};
 				this.listLoading = true; //显示加载圈
 				//分页查询
-                this.$http.post("/course/course/pagelist",para) //$.Post(.....)
+                this.$http.post("/course/course/list",para) //$.Post(.....)
                     .then(result=>{
                         this.total = result.data.total;
                         this.courses = result.data.rows;

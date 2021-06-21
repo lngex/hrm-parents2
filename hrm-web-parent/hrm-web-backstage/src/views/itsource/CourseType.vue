@@ -181,10 +181,10 @@
             },
             getTreeData(){
                 // 发送一个异步请求: get请求 /product/courseType/treeData
-                this.$http.get("/course/courseType/treeData").then(res=>{
+                this.$http.get("/course/courseType").then(res=>{
                     console.log(this);
                     this.courseTypes = res.data.resultObj;
-                    this.datas = this.getChildrenByPid(this.addForm.pid);
+                    //this.datas = this.getChildrenByPid(this.addForm.pid);
                 });
             }
         },

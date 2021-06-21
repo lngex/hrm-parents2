@@ -73,6 +73,16 @@ let routes = [
     {
         path: '/',
         component: Home,
+        name: '课程管理',
+        iconCls: 'fa fa-id-card-o',
+        children: [
+            { path: '/CourseType', component: CourseType, name: '课程类型' },
+            { path: '/Course', component: Course, name: '课程' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
         name: '系统基础设置',
         iconCls: 'el-icon-message',//图标样式class
         children: [

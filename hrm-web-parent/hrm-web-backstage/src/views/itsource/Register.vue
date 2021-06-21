@@ -19,15 +19,17 @@
         <!--<el-input type="text" v-model="employee.logo" auto-complete="off" placeholder="请输入logo！"></el-input>-->
         <el-upload
                 class="upload-demo"
-                action="http://localhost:1020/hrm/file/fastdfs/upload"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
+                action="https://lngex.oss-cn-beijing.aliyuncs.com"
+                :data="uploadData"
+                :before-upload="beforeUpload"
                 :on-success="handleSuccess"
+                :on-remove="handleRemove"
                 :file-list="fileList"
                 list-type="picture">
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
+
       </el-form-item>
       <el-form-item prop="meal" label="套餐选择">
         <el-select v-model="employee.mealId" placeholder="请选择">
@@ -99,7 +101,127 @@
 
 <script>
     export default {
-        data() {
+      methods: {
+        getUUID() {
+          var s = [];
+          var hexDigits = "0123456789abcdef";
+          for (var i = 0; i < 36; i++) {
+            s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+          }
+          s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+          s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+          s[8] = s[13] = s[18] = s[23] = "-";
+          var uuid = s.join("");
+          return uuid;
+        },
+        async beforeUpload(){
+          await this.$http.get("/oss/alioss/up").then(response=>{
+            //设置相关的参数
+            var resultObj = response.data.resultObj;
+            this.uploadData.policy = resultObj.policy;
+
+            this.uploadData.signature = resultObj.signature;
+            this.uploadData.ossaccessKeyId = resultObj.accessid;
+            //上传的文件名，使用UUID处理一下
+            this.uploadData.key = resultObj.dir + '/'+this.getUUID()+'_${filename}';
+            this.uploadData.dir = resultObj.dir;
+            this.uploadData.host = resultObj.host;
+          });
+        },
+        handleSuccess(res, file) {
+          // this.fileList.pop();
+          //上传的完整的文件地址
+          var urlPath = this.uploadData.host + '/' + this.uploadData.key.replace("${filename}",file.name) ;
+          this.employee.logo = urlPath;
+          this.$message({message: '上传成功，图片地址：'+this.employee.logo, type: 'success' });
+        },
+        getTenantTypes(){
+          this.$http.post("/system/tenantType/list",{}) //$.Post(.....)
+                  .then(result=>{
+                    this.tenantTypes = result.data.rows;
+                  });
+        },
+        getMeals(){
+          this.$http.post("/auth/meal/list",{}).then(res=>{
+            this.meals = res.data.rows;
+          });
+        },
+        selectAdrressConfirm(){
+          //获取值搜索框值,设置给地址
+          var searchInputV=document.getElementById("searchInput").value;
+          this.employee.address = searchInputV;
+          //关闭对话框
+          this.dialogVisable = false;
+        },
+        selectAdrress(){
+          this.dialogVisable = true;
+        },
+        handleRemove(file, fileList) {
+          console.log(file)
+          let index = this.employee.logo.lastIndexOf("/")
+          let images = this.employee.logo.substring(index+1)
+          this.filename={name:images}
+          this.$http.post("/oss/alioss/del",this.filename).then(request=>{
+            request=request.data
+            if(request.success){
+              this.this.employee.logo = null;
+            }
+          })
+
+        },
+        handlePreview(file) {
+          console.log(file);
+        },
+        //入住提交
+        settledIn(){
+          this.$refs.tenantForm.validate((valid) => {
+            //校验表单成功后才做一下操作
+            if (valid) {
+              this.$confirm('确认入驻吗？', '提示', {}).then(() => {
+                //拷贝后面对象的值到新对象,防止后面代码改动引起模型变化
+                var param = {
+                  "tenant" : {
+                    "companyName":this.employee.companyName,
+                    "companyNum":this.employee.companyNum,
+                    "address":this.employee.address,
+                    "logo":this.employee.logo,
+                    "tenantTypeId":this.employee.tenantTypeId,
+                  },
+                  "employee":{
+                    "username" :this.employee.username,
+                    "tel" :this.employee.tel,
+                    "email" :this.employee.email,
+                    "password" :this.employee.password,
+                  },
+                  "mealId":this.employee.mealId
+                };
+
+                //判断是否有id有就是修改,否则就是添加
+                this.$http.post("/system/tenant/entering",param).then((res) => {
+                  if(res.data.success){
+                    this.$message({
+                      message: '操作成功!',
+                      type: 'success'
+                    });
+                    //重置表单
+                    this.$refs['tenantForm'].resetFields();
+                    //跳转登录页面
+                    this.$router.push({ path: '/login' });
+                  }
+                  else{
+                    this.$message({
+                      message: res.data.message,
+                      type: 'error'
+                    });
+                  }
+
+                });
+              });
+            }
+          })
+        }
+      },
+      data() {
             var validatePass2 = (rule, value, callback) => {
                 console.log(value); //确认密码
                 if (value === '') {
@@ -111,12 +233,21 @@
                 }
             }
             return {
-                meals:[],
+              filename:null,
+              uploadData: {  //提交到OSS的参数
+                policy: '',
+                signature: '',
+                key: '',
+                ossaccessKeyId: '',
+                dir: '',
+                host: ''
+              },
+              meals:[],
                 tenantTypes:[],
                 keyword:'',
                 dialogVisable:false,
                 // fileList: [{"name":"xxx","http://localhost/"+this.employee.logo}],
-                fileList: [{name:"xxx",url:"http://localhost/uploads/63f18e2b-0717-4d38-b1d8-b29ab463706f.jpg"}],
+                fileList: null,
                 //employee:tenant 为了做数据表单校验不要嵌套对象
                 employee: {
                     companyName: '源码时代',
@@ -167,117 +298,9 @@
                 }
             };
         },
-        mounted() {
+      mounted() {
             this.getMeals();
             this.getTenantTypes();
-        },
-        methods: {
-            getTenantTypes(){
-                this.$http.post("/system/tenantType/list",{}) //$.Post(.....)
-                    .then(result=>{
-                        this.tenantTypes = result.data.rows;
-                    });
-            },
-            getMeals(){
-              this.$http.post("/auth/meal/list",{}).then(res=>{
-                  this.meals = res.data.rows;
-              });
-            },
-            selectAdrressConfirm(){
-              //获取值搜索框值,设置给地址
-                var searchInputV=document.getElementById("searchInput").value;
-                this.employee.address = searchInputV;
-                //关闭对话框
-                this.dialogVisable = false;
-            },
-            selectAdrress(){
-                this.dialogVisable = true;
-            },
-            handleSuccess(response, file, fileList){
-                if(response.success){
-                    this.employee.logo = response.resultObj;
-                }else{
-                    this.$message({
-                        message: '上传失败!',
-                        type: 'error'
-                    });
-                }
-            },
-            handleRemove(file, fileList) {
-                var path = file.response.resultObj;
-                var param = {
-                    path:path
-                };
-                this.$http.post("/fastdfs/fastdfs/remove",param).then((res) => {
-                    if(res.data.success){
-                        this.$message({
-                            message: '操作成功!',
-                            type: 'success'
-                        });
-
-                        //
-                    }
-                    else{
-                        this.$message({
-                            message: res.data.message,
-                            type: 'error'
-                        });
-                    }
-
-                });
-
-            },
-            handlePreview(file) {
-                console.log(file);
-            },
-            //入住提交
-            settledIn(){
-                this.$refs.tenantForm.validate((valid) => {
-                    //校验表单成功后才做一下操作
-                    if (valid) {
-                        this.$confirm('确认入驻吗？', '提示', {}).then(() => {
-                            //拷贝后面对象的值到新对象,防止后面代码改动引起模型变化
-                            var param = {
-                                "tenant" : {
-                                    "companyName":this.employee.companyName,
-                                    "companyNum":this.employee.companyNum,
-                                    "address":this.employee.address,
-                                    "logo":this.employee.logo,
-                                    "tenantTypeId":this.employee.tenantTypeId,
-                                },
-                                "employee":{
-                                    "username" :this.employee.username,
-                                    "tel" :this.employee.tel,
-                                    "email" :this.employee.email,
-                                    "password" :this.employee.password,
-                                },
-                                "mealId":this.employee.mealId
-                            };
-
-                            //判断是否有id有就是修改,否则就是添加
-                            this.$http.post("/system/tenant/entering",param).then((res) => {
-                                if(res.data.success){
-                                    this.$message({
-                                        message: '操作成功!',
-                                        type: 'success'
-                                    });
-                                    //重置表单
-                                    this.$refs['tenantForm'].resetFields();
-                                    //跳转登录页面
-                                    this.$router.push({ path: '/login' });
-                                }
-                                else{
-                                    this.$message({
-                                        message: res.data.message,
-                                        type: 'error'
-                                    });
-                                }
-
-                            });
-                        });
-                    }
-                })
-            }
         },
     }
 

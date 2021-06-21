@@ -3,6 +3,8 @@ package cn.lngex.system.vo;
 import cn.lngex.system.domain.Employee;
 import cn.lngex.system.domain.Tenant;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class EnteringVo implements Serializable {
@@ -10,16 +12,19 @@ public class EnteringVo implements Serializable {
     /**
      * 机构对象
      */
+    @Valid
     private Tenant tenant;
 
     /**
      * 员工对象
      */
+    @Valid
     private Employee employee;
 
     /**
      * mealId
      */
+    @NotNull(message = "mealId不能为空")
     private Long mealId;
 
     @Override

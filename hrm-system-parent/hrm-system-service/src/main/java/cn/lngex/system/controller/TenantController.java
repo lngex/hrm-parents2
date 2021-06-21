@@ -9,8 +9,10 @@ import cn.lngex.utils.PageList;
 import com.baomidou.mybatisplus.plugins.Page;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -95,7 +97,7 @@ public class TenantController {
      * @return
      */
     @PostMapping("/entering")
-    public AjaxResult entering(@RequestBody EnteringVo enteringVo){
+    public AjaxResult entering(@RequestBody @Valid EnteringVo enteringVo){
         return tenantService.entering(enteringVo);
     }
 }

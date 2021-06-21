@@ -5,11 +5,15 @@
     <file url="file://$PROJECT_DIR$/hrm-auth-parent/hrm-auth-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hrm-basic-parent/hrm-basic-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hrm-basic-parent/hrm-basic-util/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrm-course-parent/hrm-course-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrm-course-parent/hrm-course-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrm-oss-parent/hrm-oss-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hrm-support-parent/hrm-config-server-1010/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hrm-support-parent/hrm-eureka-service-2010/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hrm-support-parent/hrm-zuul-server-1030/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hrm-system-parent/hrm-system-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hrm-system-parent/hrm-system-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hrm-test-parent/hrm-test-aliupfile/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hrm-test-parent/hrm-test-mybatisplus/src/main/java" charset="UTF-8" />
   </component>
 </project>

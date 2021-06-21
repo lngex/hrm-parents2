@@ -56,7 +56,7 @@ public class TenantServiceImpl extends ServiceImpl<TenantMapper, Tenant> impleme
     @Override
     public AjaxResult entering(EnteringVo enteringVo) {
         AjaxResult me = AjaxResult.me();
-        try {
+        /*try {*/
             /* 保存t_login_user */
             LoginUser loginUser = new LoginUser();
             loginUser.setType(0)
@@ -81,10 +81,10 @@ public class TenantServiceImpl extends ServiceImpl<TenantMapper, Tenant> impleme
             employeeMapper.insert(employee);
             /* 修改信息 */
             tenantMapper.updateById(tenant.setAdminId(employee.getId()));
-        } catch (Exception e) {
+/*        } catch (Exception e) {
             me.setMessage("系统繁忙").setSuccess(false);
             e.printStackTrace();
-        }
+        }*/
         return me;
     }
 }

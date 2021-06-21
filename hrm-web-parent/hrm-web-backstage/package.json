@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "ali-oss": "^6.15.2",
     "axios": "^0.15.3",
     "echarts": "^3.3.2",
     "element-ui": "^2.11.0",

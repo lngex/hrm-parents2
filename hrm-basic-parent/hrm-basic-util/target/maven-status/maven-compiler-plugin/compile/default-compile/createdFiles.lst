@@ -1,4 +1,5 @@
 cn\lngex\utils\LetterUtil.class
+cn\lngex\utils\aop\ExceptionHandlerAop.class
 cn\lngex\utils\PageList.class
 cn\lngex\utils\PropertiesHelper.class
 cn\lngex\utils\StrUtils.class

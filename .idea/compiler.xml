@@ -7,14 +7,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="hrm-basic-util" />
-        <module name="hrm-auth-common" />
-        <module name="hrm-system-common" />
         <module name="hrm-test-mybatisplus" />
+        <module name="hrm-course-service" />
         <module name="hrm-eureka-service-2010" />
+        <module name="hrm-oss-service" />
         <module name="hrm-basic-common" />
         <module name="hrm-system-service" />
         <module name="hrm-auth-service" />
+        <module name="hrm-course-common" />
         <module name="hrm-config-server-1010" />
+        <module name="hrm-auth-common" />
+        <module name="hrm-system-common" />
+        <module name="hrm-test-aliupfile" />
         <module name="hrm-zuul-server-1030" />
       </profile>
     </annotationProcessing>
@@ -28,12 +32,18 @@
       <module name="hrm-basic-parent" options="-parameters" />
       <module name="hrm-basic-util" options="-parameters" />
       <module name="hrm-config-server-1010" options="-parameters" />
+      <module name="hrm-course-common" options="-parameters" />
+      <module name="hrm-course-parent" options="-parameters" />
+      <module name="hrm-course-service" options="-parameters" />
       <module name="hrm-eureka-service-2010" options="-parameters" />
+      <module name="hrm-oss-parent" options="-parameters" />
+      <module name="hrm-oss-service" options="-parameters" />
       <module name="hrm-parent" options="-parameters" />
       <module name="hrm-support-parent" options="-parameters" />
       <module name="hrm-system-common" options="-parameters" />
       <module name="hrm-system-parent" options="-parameters" />
       <module name="hrm-system-service" options="-parameters" />
+      <module name="hrm-test-aliupfile" options="-parameters" />
       <module name="hrm-test-mybatisplus" options="-parameters" />
       <module name="hrm-test-parent" options="-parameters" />
       <module name="hrm-zuul-server-1030" options="-parameters" />

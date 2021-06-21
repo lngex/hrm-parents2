@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -37,7 +38,7 @@ public class Tenant extends Model<Tenant> {
     /**
      * 0待审核，1 审核通过 ， 2审核失败
      */
-    private Integer state;
+    private Integer state = 0;
     private String address;
     private String logo;
     @TableField("admin_id")
