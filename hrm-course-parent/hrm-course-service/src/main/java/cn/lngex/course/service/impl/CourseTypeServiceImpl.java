@@ -8,8 +8,6 @@ import cn.lngex.utils.AjaxResult;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -110,18 +108,43 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
     @Override
     /* 清空缓存 */
     public boolean updateById(CourseType entity) {
-        return super.updateById(entity);
+        redisTemplate.delete(CourseTypeConstant.COURSE_TYPE);
+        boolean b = super.updateById(entity);
+        doubleDelete();
+        return b;
     }
 
     @Override
     /* 清空缓存 */
     public boolean deleteById(Serializable id) {
-        return super.deleteById(id);
+        redisTemplate.delete(CourseTypeConstant.COURSE_TYPE);
+        boolean b = super.deleteById(id);
+        doubleDelete();
+        return b;
     }
 
-    @Override
-    /* 清空缓存 */
-    public boolean insert(CourseType entity) {
-        return super.insert(entity);
+    private void doubleDelete() {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            redisTemplate.delete(CourseTypeConstant.COURSE_TYPE);
+        }
     }
+
+    /**
+     * 延时双删
+     * @param entity
+     * @return
+     */
+    @Override
+    public boolean insert(CourseType entity){
+        redisTemplate.delete(CourseTypeConstant.COURSE_TYPE);
+        boolean insert = super.insert(entity);
+        doubleDelete();
+        return insert;
+    }
+
+
 }
