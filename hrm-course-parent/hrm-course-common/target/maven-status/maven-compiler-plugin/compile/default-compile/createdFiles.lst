@@ -1,11 +1,14 @@
 cn\lngex\course\domain\Course.class
 cn\lngex\course\query\CourseQuery.class
+cn\lngex\course\dto\CourseDto.class
 cn\lngex\course\query\CourseMarketQuery.class
 cn\lngex\course\domain\CourseDetail.class
 cn\lngex\course\domain\CourseMarket.class
 cn\lngex\course\query\CourseDetailQuery.class
 cn\lngex\course\query\CourseViewQuery.class
+cn\lngex\course\dto\CrombDto.class
 cn\lngex\course\domain\CourseType.class
+cn\lngex\course\dto\CoursePageQuery.class
 cn\lngex\course\query\CourseTypeQuery.class
 cn\lngex\course\query\CourseResourceQuery.class
 cn\lngex\course\domain\CourseCollect.class

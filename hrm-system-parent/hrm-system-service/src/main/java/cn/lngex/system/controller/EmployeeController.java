@@ -8,6 +8,7 @@ import cn.lngex.utils.PageList;
 import com.baomidou.mybatisplus.plugins.Page;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class EmployeeController {
      * @return Ajaxresult转换结果
      */
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('employee:add','employee:update')")
     public AjaxResult addOrUpdate(@RequestBody Employee employee){
         try {
             if( employee.getId()!=null)
@@ -44,6 +46,7 @@ public class EmployeeController {
     * @return
     */
     @DeleteMapping(value="/{id}")
+    @PreAuthorize("hasAnyAuthority('employee:delete')")
     public AjaxResult delete(@PathVariable("id") Long id){
         try {
             employeeService.deleteById(id);
@@ -56,6 +59,7 @@ public class EmployeeController {
 	
     //获取用户
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('employee:list')")
     public Employee get(@PathVariable("id")Long id)
     {
         return employeeService.selectById(id);
@@ -67,6 +71,7 @@ public class EmployeeController {
     * @return
     */
     @GetMapping()
+    @PreAuthorize("hasAnyAuthority('employee:list')")
     public List<Employee> list(){
 
         return employeeService.selectList(null);
@@ -80,6 +85,7 @@ public class EmployeeController {
     * @return PageList 分页对象
     */
     @PostMapping("/list")
+    @PreAuthorize("hasAnyAuthority('employee:list')")
     public PageList<Employee> json(@RequestBody EmployeeQuery query)
     {
         Page<Employee> page = new Page<Employee>(query.getPage(),query.getRows());

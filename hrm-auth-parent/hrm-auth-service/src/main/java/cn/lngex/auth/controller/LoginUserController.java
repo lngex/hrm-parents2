@@ -84,4 +84,9 @@ public class LoginUserController {
         page = loginUserService.selectPage(page);
         return new PageList<LoginUser>(page.getTotal(),page.getRecords());
     }
+
+    @RequestMapping("/loginsuccess")
+    public AjaxResult loginSucess(){
+        return AjaxResult.me().setMessage("登陆成功");
+    }
 }

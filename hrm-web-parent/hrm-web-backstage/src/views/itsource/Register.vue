@@ -135,6 +135,19 @@
           this.employee.logo = urlPath;
           this.$message({message: '上传成功，图片地址：'+this.employee.logo, type: 'success' });
         },
+        handleRemove(file, fileList) {
+          console.log(file)
+          let index = this.employee.logo.lastIndexOf("/")
+          let images = this.employee.logo.substring(index+1)
+          this.filename={name:images}
+          this.$http.post("/oss/alioss/del",this.filename).then(request=>{
+            request=request.data
+            if(request.success){
+              this.this.employee.logo = null;
+            }
+          })
+
+        },
         getTenantTypes(){
           this.$http.post("/system/tenantType/list",{}) //$.Post(.....)
                   .then(result=>{
@@ -155,19 +168,6 @@
         },
         selectAdrress(){
           this.dialogVisable = true;
-        },
-        handleRemove(file, fileList) {
-          console.log(file)
-          let index = this.employee.logo.lastIndexOf("/")
-          let images = this.employee.logo.substring(index+1)
-          this.filename={name:images}
-          this.$http.post("/oss/alioss/del",this.filename).then(request=>{
-            request=request.data
-            if(request.success){
-              this.this.employee.logo = null;
-            }
-          })
-
         },
         handlePreview(file) {
           console.log(file);

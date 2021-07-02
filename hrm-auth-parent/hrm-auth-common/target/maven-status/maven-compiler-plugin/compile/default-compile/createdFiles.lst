@@ -1,6 +1,9 @@
-cn\lngex\auth\query\UserMealQuery.class
 cn\lngex\auth\domain\UserMeal.class
+cn\lngex\auth\query\PermissionQuery.class
+cn\lngex\auth\query\LoginUserQuery.class
+cn\lngex\auth\domain\EmpTen.class
+cn\lngex\auth\query\UserMealQuery.class
+cn\lngex\auth\domain\Permission.class
 cn\lngex\auth\domain\Meal.class
 cn\lngex\auth\domain\LoginUser.class
-cn\lngex\auth\query\LoginUserQuery.class
 cn\lngex\auth\query\MealQuery.class

@@ -2,6 +2,7 @@ E:\Javaworkspace\hrm-parent\hrm-system-parent\hrm-system-service\src\main\java\c
 E:\Javaworkspace\hrm-parent\hrm-system-parent\hrm-system-service\src\main\java\cn\lngex\system\controller\ConfigController.java
 E:\Javaworkspace\hrm-parent\hrm-system-parent\hrm-system-service\src\main\java\cn\lngex\system\service\IEmployeeService.java
 E:\Javaworkspace\hrm-parent\hrm-system-parent\hrm-system-service\src\main\java\cn\lngex\system\controller\DepartmentController.java
+E:\Javaworkspace\hrm-parent\hrm-system-parent\hrm-system-service\src\main\java\cn\lngex\system\config\MyResourceServerConfig.java
 E:\Javaworkspace\hrm-parent\hrm-system-parent\hrm-system-service\src\main\java\cn\lngex\system\config\SwaggerConfig.java
 E:\Javaworkspace\hrm-parent\hrm-system-parent\hrm-system-service\src\main\java\cn\lngex\system\mapper\TenantMapper.java
 E:\Javaworkspace\hrm-parent\hrm-system-parent\hrm-system-service\src\main\java\cn\lngex\system\service\IConfigService.java

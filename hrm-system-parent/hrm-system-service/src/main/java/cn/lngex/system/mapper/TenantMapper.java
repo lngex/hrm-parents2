@@ -1,5 +1,6 @@
 package cn.lngex.system.mapper;
 
+import cn.lngex.auth.domain.EmpTen;
 import cn.lngex.system.domain.Tenant;
 import cn.lngex.system.query.TenantQuery;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
@@ -16,6 +17,9 @@ import java.util.List;
  * @since 2021-06-17
  */
 public interface TenantMapper extends BaseMapper<Tenant> {
+
+
+    EmpTen getEmpTen(Long loginId);
 
     /**
      * 分高级联表查询

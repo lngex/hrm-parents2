@@ -1,26 +1,41 @@
 package cn.lngex.utils;
 
+import cn.lngex.search.doc.vo.AggVo;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 //分页对象：easyui只需两个属性，total(总数),datas（分页数据）就能实现分页
 public class PageList<T> {
     private long total;
     private List<T> rows = new ArrayList<>();
+    private HashMap<String, ArrayList<AggVo>> map;
+
+    public HashMap<String, ArrayList<AggVo>> getMap() {
+        return map;
+    }
+
+    public PageList<T> setMap(HashMap<String, ArrayList<AggVo>> map) {
+        this.map = map;
+        return this;
+    }
 
     public long getTotal() {
         return total;
     }
 
-    public void setTotal(long total) {
+    public PageList<T> setTotal(long total) {
         this.total = total;
+        return this;
     }
 
     public List<T> getRows() {
         return rows;
     }
 
-    public void setRows(List<T> rows) {
+    public PageList<T> setRows(List<T> rows) {
         this.rows = rows;
+        return this;
     }
 
     @Override

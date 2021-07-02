@@ -24,4 +24,12 @@ public interface ITenantService extends IService<Tenant> {
      * @return
      */
     AjaxResult entering(EnteringVo enteringVo);
+
+
+    /**
+     * 获取tenant_id，tenant_name，user_id，user_name
+     * @param loginId
+     * @return
+     */
+    AjaxResult getEmpTen(Long loginId);
 }

@@ -10,6 +10,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
  
 /**
@@ -203,12 +205,16 @@ public class VerifyCodeUtils {
      * 获取随机验证码及其加密图片
      *
      */
-    public static String VerifyCode(int w, int h, int size) throws IOException {
+    public static Map<String, String> VerifyCode(int w, int h, int size) throws IOException {
         BASE64Encoder encoder = new BASE64Encoder();
         String code = generateVerifyCode(size).toLowerCase();
         ByteArrayOutputStream data = new ByteArrayOutputStream();
         outputImage(w, h, data, code);
-        return encoder.encode(data.toByteArray());
+        String encode = encoder.encode(data.toByteArray());
+        HashMap<String, String> stringStringHashMap = new HashMap<>();
+        stringStringHashMap.put("code",code);
+        stringStringHashMap.put("img",encode);
+        return stringStringHashMap;
     }
 
     public static void main(String[] args) throws  Exception{

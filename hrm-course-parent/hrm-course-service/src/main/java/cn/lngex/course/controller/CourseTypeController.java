@@ -85,8 +85,24 @@ public class CourseTypeController {
         return new PageList<CourseType>(page.getTotal(),page.getRecords());
     }
 
+
+    /**
+     * 类型树
+     * @return
+     */
     @PostMapping("/treedata")
     public AjaxResult treeTypeData(){
         return courseTypeService.treeTypeData();
+    }
+
+
+    /**
+     * 面包屑
+     * @param id
+     * @return
+     */
+    @GetMapping("/bread/{id}")
+    public AjaxResult bread(@PathVariable("id") Long id){
+        return courseTypeService.bread(id);
     }
 }

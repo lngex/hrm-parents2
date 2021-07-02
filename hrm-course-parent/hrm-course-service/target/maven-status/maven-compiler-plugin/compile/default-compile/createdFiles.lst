@@ -1,6 +1,7 @@
 cn\lngex\course\controller\CourseDetailController.class
 cn\lngex\course\service\impl\CourseDetailServiceImpl.class
 cn\lngex\course\service\impl\CourseMarketServiceImpl.class
+cn\lngex\course\config\RabbitMQConfig.class
 cn\lngex\course\controller\CourseCollectController.class
 cn\lngex\course\service\ICourseViewService.class
 cn\lngex\course\service\ICourseMarketService.class
@@ -23,6 +24,7 @@ cn\lngex\course\service\ICourseService.class
 cn\lngex\course\config\SwaggerConfig.class
 cn\lngex\course\mapper\CourseMarketMapper.class
 cn\lngex\course\service\impl\CourseServiceImpl.class
+cn\lngex\course\config\MyResourceServerConfig.class
 cn\lngex\course\service\ICourseResourceService.class
 cn\lngex\course\controller\CourseResourceController.class
 cn\lngex\course\controller\CourseMarketController.class

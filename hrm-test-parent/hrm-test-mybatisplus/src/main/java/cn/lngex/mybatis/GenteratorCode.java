@@ -15,7 +15,7 @@ public class GenteratorCode {
 
     public static void main(String[] args) throws InterruptedException {
         //用来获取Mybatis-Plus.properties文件的配置信息
-        ResourceBundle rb = ResourceBundle.getBundle("mybatis-course"); //不要加后缀
+        ResourceBundle rb = ResourceBundle.getBundle("mybatis-auth"); //不要加后缀
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
@@ -40,7 +40,7 @@ public class GenteratorCode {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setTablePrefix(new String[] { "t_" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{"t_course","t_course_collect","t_course_detail","t_course_market","t_course_resource","t_course_type","t_course_view"}); // 需要生成的表
+        strategy.setInclude(new String[]{"t_permission"}); // 需要生成的表
         mpg.setStrategy(strategy);
         // 包配置
         PackageConfig pc = new PackageConfig();
@@ -68,14 +68,14 @@ public class GenteratorCode {
         focList.add(new FileOutConfig("/templates/entity.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return rb.getString("OutputDirBase")+ "/cn/lngex/course/domain/" + tableInfo.getEntityName() + ".java";
+                return rb.getString("OutputDirBase")+ "/cn/lngex/auth/domain/" + tableInfo.getEntityName() + ".java";
             }
         });
         //query
         focList.add(new FileOutConfig("/templates/query.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return rb.getString("OutputDirBase")+ "/cn/lngex/course/query/" + tableInfo.getEntityName() + "Query.java";
+                return rb.getString("OutputDirBase")+ "/cn/lngex/auth/query/" + tableInfo.getEntityName() + "Query.java";
             }
         });
 
@@ -83,7 +83,7 @@ public class GenteratorCode {
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return rb.getString("OutputDirXml")+ "/cn/lngex/course/mapper/" + tableInfo.getEntityName() + "Mapper.xml";
+                return rb.getString("OutputDirXml")+ "/cn/lngex/auth/mapper/" + tableInfo.getEntityName() + "Mapper.xml";
             }
         });
         cfg.setFileOutConfigList(focList);

@@ -34,4 +34,13 @@ public class BaseQuery {
     public void setRows(Integer rows) {
         this.rows = rows;
     }
+
+    @Override
+    public String toString() {
+        return "BaseQuery{" +
+                "keyword='" + keyword + '\'' +
+                ", page=" + page +
+                ", rows=" + rows +
+                '}';
+    }
 }

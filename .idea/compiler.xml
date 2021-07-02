@@ -13,13 +13,21 @@
         <module name="hrm-oss-service" />
         <module name="hrm-basic-common" />
         <module name="hrm-system-service" />
+        <module name="hrm-user-common" />
         <module name="hrm-auth-service" />
         <module name="hrm-course-common" />
+        <module name="hrm-test-SpringSecurityDemo" />
         <module name="hrm-config-server-1010" />
+        <module name="hrm-seacrh-common" />
+        <module name="hrm-three-service" />
         <module name="hrm-auth-common" />
         <module name="hrm-system-common" />
+        <module name="hrm-resourse-common" />
+        <module name="hrm-system-feign" />
+        <module name="hrm-user-service" />
         <module name="hrm-test-aliupfile" />
         <module name="hrm-zuul-server-1030" />
+        <module name="hrm-seacrh-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -39,13 +47,24 @@
       <module name="hrm-oss-parent" options="-parameters" />
       <module name="hrm-oss-service" options="-parameters" />
       <module name="hrm-parent" options="-parameters" />
+      <module name="hrm-resourse-common" options="-parameters" />
+      <module name="hrm-seacrh-common" options="-parameters" />
+      <module name="hrm-seacrh-parent" options="-parameters" />
+      <module name="hrm-seacrh-service" options="-parameters" />
       <module name="hrm-support-parent" options="-parameters" />
       <module name="hrm-system-common" options="-parameters" />
+      <module name="hrm-system-feign" options="-parameters" />
       <module name="hrm-system-parent" options="-parameters" />
       <module name="hrm-system-service" options="-parameters" />
+      <module name="hrm-test-SpringSecurityDemo" options="-parameters" />
       <module name="hrm-test-aliupfile" options="-parameters" />
       <module name="hrm-test-mybatisplus" options="-parameters" />
       <module name="hrm-test-parent" options="-parameters" />
+      <module name="hrm-three-parent" options="-parameters" />
+      <module name="hrm-three-service" options="-parameters" />
+      <module name="hrm-user-common" options="-parameters" />
+      <module name="hrm-user-parent" options="-parameters" />
+      <module name="hrm-user-service" options="-parameters" />
       <module name="hrm-zuul-server-1030" options="-parameters" />
     </option>
   </component>

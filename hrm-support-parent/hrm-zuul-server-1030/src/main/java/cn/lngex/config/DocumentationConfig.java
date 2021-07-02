@@ -18,6 +18,8 @@ public class DocumentationConfig implements SwaggerResourcesProvider {
         resources.add(swaggerResource("权限管理", "/nb/auth/v2/api-docs", "2.0"));
         resources.add(swaggerResource("oss文件管理", "/nb/oss/v2/api-docs", "2.0"));
         resources.add(swaggerResource("课程管理", "/nb/course/v2/api-docs", "2.0"));
+        resources.add(swaggerResource("ES全文检索", "/nb/search/v2/api-docs", "2.0"));
+        resources.add(swaggerResource("用户管理", "/nb/user/v2/api-docs", "2.0"));
         return resources;
     }
 

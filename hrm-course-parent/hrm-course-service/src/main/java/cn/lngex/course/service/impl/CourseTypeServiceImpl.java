@@ -2,9 +2,11 @@ package cn.lngex.course.service.impl;
 
 import cn.lngex.common.constant.CourseTypeConstant;
 import cn.lngex.course.domain.CourseType;
+import cn.lngex.course.dto.CrombDto;
 import cn.lngex.course.mapper.CourseTypeMapper;
 import cn.lngex.course.service.ICourseTypeService;
 import cn.lngex.utils.AjaxResult;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,31 @@ public class CourseTypeServiceImpl extends ServiceImpl<CourseTypeMapper, CourseT
     public AjaxResult treeTypeData() {
 
         List<CourseType> list = courseTypeMapper.treeTypeData(0L);
+        return AjaxResult.me().setResultObj(list);
+    }
+
+    /**
+     * 面包屑
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public AjaxResult bread(Long id) {
+        List<CrombDto> list = new ArrayList<>();
+        /* 查询自己 */
+        CourseType courseType = courseTypeMapper.selectById(id);
+        String[] split = courseType.getPath().split("\\.");
+        for (String pathId:split) {
+            CrombDto crombDto = new CrombDto();
+            Long aLong = Long.valueOf(pathId);
+            /* 查询自己 */
+            CourseType courseType1 = courseTypeMapper.selectById(aLong);
+            EntityWrapper<CourseType> courseTypeEntityWrapper = new EntityWrapper<>();
+            courseTypeEntityWrapper.eq("pid",courseType1.getPid()).and().ne("id",courseType1.getId());
+            List<CourseType> courseTypes = courseTypeMapper.selectList(courseTypeEntityWrapper);
+            list.add(crombDto.setOwn(courseType1).setBros(courseTypes));
+        }
         return AjaxResult.me().setResultObj(list);
     }
 

@@ -9,6 +9,7 @@ cn\lngex\utils\ClassUtils.class
 cn\lngex\utils\encrypt\MD5.class
 cn\lngex\utils\ZipUtils.class
 cn\lngex\utils\AjaxResult.class
+cn\lngex\utils\encrypt\HttpRequest.class
 cn\lngex\utils\ClassUtils$1.class
 cn\lngex\utils\encrypt\DES.class
 cn\lngex\utils\CodeGenerateUtils.class

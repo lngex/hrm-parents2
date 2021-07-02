@@ -20,4 +20,11 @@ public interface ICourseTypeService extends IService<CourseType> {
      */
     AjaxResult treeTypeData();
 
+
+    /**
+     * 面包屑
+     * @param id
+     * @return
+     */
+    AjaxResult bread(Long id);
 }

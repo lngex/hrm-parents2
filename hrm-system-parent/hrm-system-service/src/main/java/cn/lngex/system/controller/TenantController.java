@@ -5,11 +5,8 @@ import cn.lngex.system.query.TenantQuery;
 import cn.lngex.system.service.ITenantService;
 import cn.lngex.system.vo.EnteringVo;
 import cn.lngex.utils.AjaxResult;
-import cn.lngex.utils.PageList;
-import com.baomidou.mybatisplus.plugins.Page;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -99,5 +96,17 @@ public class TenantController {
     @PostMapping("/entering")
     public AjaxResult entering(@RequestBody @Valid EnteringVo enteringVo){
         return tenantService.entering(enteringVo);
+    }
+
+
+    /**
+     * 获取tenant_id，tenant_name，user_id，user_name
+     * @param loginId
+     * @return
+     */
+    @GetMapping("/getEmpTen/{loginId}")
+    public AjaxResult getEmpTen(@PathVariable("loginId") Long loginId){
+        System.out.println("==================="+loginId);
+        return tenantService.getEmpTen(loginId);
     }
 }

@@ -1,6 +1,9 @@
 E:\Javaworkspace\hrm-parent\hrm-auth-parent\hrm-auth-common\src\main\java\cn\lngex\auth\query\MealQuery.java
 E:\Javaworkspace\hrm-parent\hrm-auth-parent\hrm-auth-common\src\main\java\cn\lngex\auth\query\LoginUserQuery.java
+E:\Javaworkspace\hrm-parent\hrm-auth-parent\hrm-auth-common\src\main\java\cn\lngex\auth\domain\EmpTen.java
 E:\Javaworkspace\hrm-parent\hrm-auth-parent\hrm-auth-common\src\main\java\cn\lngex\auth\query\UserMealQuery.java
+E:\Javaworkspace\hrm-parent\hrm-auth-parent\hrm-auth-common\src\main\java\cn\lngex\auth\domain\Permission.java
 E:\Javaworkspace\hrm-parent\hrm-auth-parent\hrm-auth-common\src\main\java\cn\lngex\auth\domain\Meal.java
 E:\Javaworkspace\hrm-parent\hrm-auth-parent\hrm-auth-common\src\main\java\cn\lngex\auth\domain\LoginUser.java
 E:\Javaworkspace\hrm-parent\hrm-auth-parent\hrm-auth-common\src\main\java\cn\lngex\auth\domain\UserMeal.java
+E:\Javaworkspace\hrm-parent\hrm-auth-parent\hrm-auth-common\src\main\java\cn\lngex\auth\query\PermissionQuery.java

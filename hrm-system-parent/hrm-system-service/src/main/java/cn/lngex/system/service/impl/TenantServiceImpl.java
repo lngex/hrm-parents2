@@ -1,5 +1,6 @@
 package cn.lngex.system.service.impl;
 
+import cn.lngex.auth.domain.EmpTen;
 import cn.lngex.auth.domain.LoginUser;
 import cn.lngex.auth.domain.UserMeal;
 import cn.lngex.auth.feign.IAuthFeign;
@@ -86,5 +87,12 @@ public class TenantServiceImpl extends ServiceImpl<TenantMapper, Tenant> impleme
             e.printStackTrace();
         }*/
         return me;
+    }
+
+
+    @Override
+    public AjaxResult getEmpTen(Long loginId) {
+        EmpTen empTen= tenantMapper.getEmpTen(loginId);
+        return AjaxResult.me().setResultObj(empTen);
     }
 }

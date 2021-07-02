@@ -21,6 +21,7 @@ cn\lngex\system\mapper\TenantTypeMapper.class
 cn\lngex\system\controller\OperLogController.class
 cn\lngex\system\service\IOperLogService.class
 cn\lngex\system\controller\TenantTypeController.class
+cn\lngex\system\config\MyResourceServerConfig.class
 cn\lngex\system\controller\ConfigController.class
 cn\lngex\system\service\impl\TenantTypeServiceImpl.class
 cn\lngex\system\service\impl\TenantServiceImpl.class

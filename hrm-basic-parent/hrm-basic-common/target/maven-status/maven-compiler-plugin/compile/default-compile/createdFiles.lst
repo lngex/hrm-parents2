@@ -1,2 +1,4 @@
+cn\lngex\common\constant\AuthConstant.class
+cn\lngex\common\constant\DataDictionary.class
 cn\lngex\common\constant\CourseTypeConstant.class
 cn\lngex\common\query\BaseQuery.class

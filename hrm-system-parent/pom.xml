@@ -14,6 +14,7 @@
     <modules>
         <module>hrm-system-common</module>
         <module>hrm-system-service</module>
+        <module>hrm-system-feign</module>
     </modules>
 
     <properties>

@@ -28,7 +28,18 @@ public class ExceptionHandlerAop {
     @ExceptionHandler(Exception.class)
     public AjaxResult excetionHandle(Exception e){
         e.printStackTrace();
-        System.out.println("================================");
-        return AjaxResult.me().setSuccess(false).setMessage("系统繁忙");
+        return AjaxResult.me().setSuccess(false).setMessage(e.getMessage());
+    }
+
+
+    /**
+     * 抓取运行时异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(RuntimeException.class)
+    public AjaxResult runTimeException(Exception e){
+        e.printStackTrace();
+        return AjaxResult.me().setSuccess(false).setMessage(e.getMessage());
     }
 }

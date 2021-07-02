@@ -26,7 +26,9 @@
 
 		<!--列表v-loading="listLoading"-->
 		<el-table @row-click="rowClick" :data="courses" v-loading="listLoading"
-				  highlight-current-row  style="width: 100%;">
+				  highlight-current-row  style="width: 100%;"
+				  @selection-change="handleSelectionChange"
+		>
 			<!--多选框-->
 			<el-table-column type="selection" width="55">
 			</el-table-column>
@@ -61,7 +63,7 @@
 		</el-table>
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-button type="danger">批量删除</el-button>
+			<el-button type="danger" @click="batchDel()">批量删除</el-button>
 			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange"  :page-size="10" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
@@ -139,19 +141,21 @@
 					></el-cascader>
 				</el-form-item>
 
-				<el-form-item prop="logo" label="课程封面">
+				<el-form-item prop="pic" label="封面">
 					<!--<el-input type="text" v-model="employee.logo" auto-complete="off" placeholder="请输入logo！"></el-input>-->
 					<el-upload
 							class="upload-demo"
-							action="http://localhost:1020/hrm/file/fastdfs/upload"
-							:on-preview="handlePreview"
-							:on-remove="handleRemove"
+							action="https://lngex.oss-cn-beijing.aliyuncs.com"
+							:data="uploadData"
+							:before-upload="beforeUpload"
 							:on-success="handleSuccess"
+							:on-remove="handleRemove"
 							:file-list="fileList"
 							list-type="picture">
 						<el-button size="small" type="primary">点击上传</el-button>
 						<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 					</el-upload>
+
 				</el-form-item>
 
 
@@ -203,6 +207,17 @@
         },
 		data() {
 			return {
+				ids:[],
+				fileList:null,
+				filename:null,
+				uploadData: {  //提交到OSS的参数
+					policy: '',
+					signature: '',
+					key: '',
+					ossaccessKeyId: '',
+					dir: '',
+					host: ''
+				},
                 row:"",
                 courseTypeProps:{
                     value:"id",
@@ -210,7 +225,13 @@
 				},
                 priceDisabled:true,
                 editorOption: {},//富文本编辑框配置
-			    grades:[],
+			    grades:[
+			    		{"id":1 , "name":"青铜"},
+						{"id":2 , "name":"白银"},
+						{"id":3 , "name":"黄金"},
+						{"id":4 , "name":"铂金"},
+
+				],
                 charges:[
 					{"id":1 , "name":"免费"},
 					{"id":2 , "name":"收费"}
@@ -232,7 +253,7 @@
                     price:'',
                     priceOld:'',
                     qq:'',
-                    pic:''
+                    pic:'',
 				},
                 listLoading:false,
 				//查询对象
@@ -245,7 +266,78 @@
 			}
 		},
 		methods: {
-            handleSuccess(response, file, fileList){
+			batchDel(){
+				if(!this.ids[0]){
+					this.$message({ message: '老铁，你不选中数据，臣妾上不了啊....',type: 'error'});
+				}
+				var ids = this.ids.map(item => item.id)
+				alert("sda")
+				this.$http.post("/course/course/batchdel",ids).then(res=>{
+					res=res.data
+					if(res.success){
+						this.$message({
+							message: '删除成功',
+							type: 'success'
+						});
+						this.getDepartments();
+					}else {
+						this.$message({
+							message: '删除失败',
+							type: 'error'
+						});
+					}
+				})
+			},
+			handleSelectionChange(val){
+				this.ids = val;
+			},
+			async beforeUpload(){
+				await this.$http.get("/oss/alioss/up").then(response=>{
+					//设置相关的参数
+					var resultObj = response.data.resultObj;
+					this.uploadData.policy = resultObj.policy;
+
+					this.uploadData.signature = resultObj.signature;
+					this.uploadData.ossaccessKeyId = resultObj.accessid;
+					//上传的文件名，使用UUID处理一下
+					this.uploadData.key = resultObj.dir + '/'+this.getUUID()+'_${filename}';
+					this.uploadData.dir = resultObj.dir;
+					this.uploadData.host = resultObj.host;
+				});
+			},
+			handleSuccess(res, file) {
+				// this.fileList.pop();
+				//上传的完整的文件地址
+				var urlPath = this.uploadData.host + '/' + this.uploadData.key.replace("${filename}",file.name) ;
+				this.addForm.pic = urlPath;
+				this.$message({message: '上传成功，图片地址：'+this.addForm.pic, type: 'success' });
+			},
+			handleRemove(file, fileList) {
+				console.log(file)
+				let index = this.addForm.pic.lastIndexOf("/")
+				let images = this.addForm.pic.substring(index+1)
+				this.filename={name:images}
+				this.$http.post("/oss/alioss/del",this.filename).then(request=>{
+					request=request.data
+					if(request.success){
+						this.this.addForm.pic = null;
+					}
+				})
+
+			},
+			getUUID() {
+				var s = [];
+				var hexDigits = "0123456789abcdef";
+				for (var i = 0; i < 36; i++) {
+					s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+				}
+				s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+				s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+				s[8] = s[13] = s[18] = s[23] = "-";
+				var uuid = s.join("");
+				return uuid;
+			},
+            /*handleSuccess(response, file, fileList){
                 if(response.success){
                     this.addForm.pic = response.resultObj;
                 }else{
@@ -254,7 +346,7 @@
                         type: 'error'
                     });
                 }
-            },
+            },*/
             addSubmit(){
                 this.addForm.courseTypeId = this.addForm.courseTypeId[this.addForm.courseTypeId.length - 1];
 				/**
@@ -323,7 +415,7 @@
               });
 			},
             getCourseTypes(){
-              this.$http.get("/course/courseType/treeData").then(result=>{
+              this.$http.get("/course/courseType").then(result=>{
                   this.courseTypes = result.data.resultObj;
               });
 			},
@@ -364,8 +456,22 @@
                     });
 			},
             onLineCourse(){
-                //获取选中的行
-				if(!this.row || this.row  === ""){
+
+            	if(!this.ids[0]){
+					this.$message({ message: '老铁，你不选中数据，臣妾上不了啊....',type: 'error'});
+				}
+            	var ids = this.ids.map(item => item.id)
+            	console.log(this.ids)
+				this.$http.post("/course/course/onLineCourse",ids).then(res=> {
+					var ajaxResult = res.data;
+					if (ajaxResult.success) {
+						this.$message({message: '老铁，上线成功.', type: 'success'});
+						this.getCourses();
+					} else {
+						this.$message({message: ajaxResult.message, type: 'error'});
+					}
+					//获取选中的行
+					/*if(!this.row || this.row  === ""){
                     this.$message({ message: '老铁，你不选中数据，臣妾上不了啊....',type: 'error'});
 				    return;
 				}
@@ -378,16 +484,16 @@
 					}else{
                         this.$message({ message: ajaxResult.message,type: 'error'});
 					}
+				})*/
 				})
 			},
             offLineCourse(){
                 //获取选中的行
-                if(!this.row || this.row  === ""){
-                    this.$message({ message: '老铁，你不选中数据，臣妾下不了啊....',type: 'error'});
-                    return;
-                }
-
-                this.$http.post("/course/course/offLineCourse/"+this.row.id).then(res=>{
+				if(!this.ids[0]){
+					this.$message({ message: '老铁，你不选中数据，臣妾上不了啊....',type: 'error'});
+				}
+				var ids = this.ids.map(item => item.id)
+                this.$http.post("/course/course/offLineCourse",ids).then(res=>{
                     var ajaxResult = res.data;
                     if(ajaxResult.success){
                         this.$message({ message: '老铁，下线成功.',type: 'success'});

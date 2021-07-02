@@ -8,6 +8,7 @@ import cn.lngex.utils.PageList;
 import com.baomidou.mybatisplus.plugins.Page;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class DepartmentController {
      * @return Ajaxresult转换结果
      */
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('department:add','department:update')")
     public AjaxResult addOrUpdate(@RequestBody Department department){
         try {
             if( department.getId()!=null)
@@ -44,6 +46,7 @@ public class DepartmentController {
     * @return
     */
     @DeleteMapping(value="/{id}")
+    @PreAuthorize("hasAnyAuthority('department:delete')")
     public AjaxResult delete(@PathVariable("id") Long id){
         try {
             departmentService.deleteById(id);
@@ -56,6 +59,7 @@ public class DepartmentController {
 	
     //获取用户
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('department:list')")
     public Department get(@PathVariable("id")Long id)
     {
         return departmentService.selectById(id);
@@ -67,6 +71,7 @@ public class DepartmentController {
     * @return
     */
     @GetMapping()
+    @PreAuthorize("hasAnyAuthority('department:list')")
     public List<Department> list(){
 
         return departmentService.selectList(null);
@@ -80,6 +85,7 @@ public class DepartmentController {
     * @return PageList 分页对象
     */
     @PostMapping("/list")
+    @PreAuthorize("hasAnyAuthority('department:list')")
     public PageList<Department> json(@RequestBody DepartmentQuery query)
     {
         Page<Department> page = new Page<Department>(query.getPage(),query.getRows());
