@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/login").permitAll() // 放行路径
+                .antMatchers("/loginUser/login").permitAll() // 放行路径
                 .anyRequest().authenticated() // 其他路径需要认证
                 .and().formLogin() // 允许表单登录
                 .successForwardUrl("/loginUser/loginsuccess") // 登陆成功也

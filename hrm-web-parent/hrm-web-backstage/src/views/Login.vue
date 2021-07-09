@@ -52,23 +52,27 @@
         this.$refs.ruleForm2.validate((valid) => {
           if (valid) {
             //_this.$router.replace('/table');
-            this.logining = true;
             //NProgress.start();
-            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass,type:0};
+            this.$http.post("/auth/loginUser/login",loginParams).then(res=>{
+              res = res.data
+              if(res.success){
+                //登录成功跳转/table的路由地址
+                sessionStorage.setItem('user', '{"username":"'+loginParams.username+'","password":"******"}');
+                //本来就是字符串在包装一个就完蛋了,巨大坑..
+                sessionStorage.setItem('token', res.resultObj.access_token);
+                //修改登录成功后跳转到首页
+                this.$router.push({ path: '/echarts' });
+                this.logining = false;
+                return true;
+              }else {
+                console.log('error submit!!');
+                this.logining = false;
+                return false;
+              }
 
-            //登录成功跳转/table的路由地址
-            sessionStorage.setItem('user', '{"username":"admin","password":"123"}');
-            //本来就是字符串在包装一个就完蛋了,巨大坑..
-            sessionStorage.setItem('token', "xxxx");
-            // this.$router.push({ path: '/table' });
-            //修改登录成功后跳转到首页
-            this.$router.push({ path: '/echarts' });
-            this.logining = false;
-            return;
+            })
 
-          } else {
-            console.log('error submit!!');
-            return false;
           }
         });
       }

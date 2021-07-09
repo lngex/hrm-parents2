@@ -19,6 +19,7 @@
 
 	<script type="text/javascript" src="js/plugins/vue/dist/vue.js"></script>
 	<script type="text/javascript" src="js/plugins/axios/dist/axios.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 </head>
 
 <body>
@@ -540,7 +541,7 @@
 </body>
 <script src="/js/axios.common.js"></script>
 <script>
-	axios.defaults.baseURL = "http://127.0.0.1:1020/hrm"; //配置前缀
+	axios.defaults.baseURL = "http://127.0.0.1:1020/nb"; //配置前缀
 	Vue.prototype.$http = axios; //给Vue这个类添加一个原型的属性,这个类的对象都能调用
 	Vue.config.productionTip = false;
 	$().ready(function() {
@@ -549,20 +550,46 @@
 			data(){
 				return {
 					formParams:{
-						phone:'18244444444',
-						password:'123456'
+						phone:'lzl',
+						password:'1'
 					}
 				}
 			},
 			methods:{
 				submitLogin:function () {
-					this.$http.post("/user/user/login",this.formParams).then(res=>{
+					var lo = {
+						username:this.formParams.phone,
+						password:this.formParams.password,
+						type:1
+					}
+					this.$http.post("/auth/loginUser/login",lo).then(res=>{
 						var ajaxResult = res.data;
 						if(ajaxResult.success){
 							alert("登录成功");
-                            var token = ajaxResult.resultObj;
-                            document.cookie = "token="+token+";Domain=.hrm.com";
-
+                            var token = ajaxResult.resultObj.access_token;
+                            /*document.cookie = "token="+token+";Domain=.hrm.com";*/
+							$.cookie('the_cookie',token,{
+								expires:1,
+								path:'/',
+								domain:'lngex.cn',
+								secure:false
+							})
+							/* 获取刷新时间与设置过期时间 */
+							var rtoken = ajaxResult.resultObj.refresh_token;
+							$.cookie('rtoken',rtoken,{
+								expires:1,
+								path:'/',
+								domain:'lngex.cn',
+								secure:false
+							})
+							var time = ajaxResult.resultObj.expires_in + new Date().getTime();
+							$.cookie('etime',time,{
+								expires:1,
+								path:'/',
+								domain:'lngex.cn',
+								secure:false
+							})
+							location.href="http://www.lngex.cn"
 						}else{
 							alert("登录失败:"+ajaxResult.message);
 						}
@@ -570,10 +597,6 @@
 				}
 			},
 			mounted(){
-                //模拟ajax请求访问资源---------------------------------------
-                this.$http.get("/user/user/list",this.formParams).then(res=>{
-                    console.log(res);
-                });
 			}
 		});
 	});

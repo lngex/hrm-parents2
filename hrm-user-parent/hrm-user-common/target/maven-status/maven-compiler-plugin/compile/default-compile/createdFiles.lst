@@ -1,0 +1,13 @@
+cn\lngex\user\domain\VipBase.class
+cn\lngex\user\dto\UserRegDto.class
+cn\lngex\user\query\VipBaseQuery.class
+cn\lngex\user\domain\VipAddress.class
+cn\lngex\user\query\VipAddressQuery.class
+cn\lngex\user\query\VipRealInfoQuery.class
+cn\lngex\user\dto\SmsCodeDeto.class
+cn\lngex\user\constant\UserConstant.class
+cn\lngex\user\query\VipUserQuery.class
+cn\lngex\user\domain\VipRealInfo.class
+cn\lngex\user\query\VipGrowLogQuery.class
+cn\lngex\user\domain\VipUser.class
+cn\lngex\user\domain\VipGrowLog.class

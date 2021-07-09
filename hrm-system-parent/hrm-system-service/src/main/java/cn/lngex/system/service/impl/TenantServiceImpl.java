@@ -16,6 +16,7 @@ import cn.lngex.utils.PageList;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,9 +61,11 @@ public class TenantServiceImpl extends ServiceImpl<TenantMapper, Tenant> impleme
         /*try {*/
             /* 保存t_login_user */
             LoginUser loginUser = new LoginUser();
-            loginUser.setType(0)
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String encode = bCryptPasswordEncoder.encode(enteringVo.getEmployee().getPassword());
+        loginUser.setType(0)
                     .setUsername(enteringVo.getEmployee().getUsername())
-                    .setPassword(enteringVo.getEmployee().getPassword());
+                    .setPassword(encode);
             AjaxResult ajaxResult = authFeign.addOrUpdate(loginUser);
             Integer id = (Integer) ajaxResult.getResultObj();
             Long loginUserId = Long.valueOf(id);
@@ -78,6 +81,7 @@ public class TenantServiceImpl extends ServiceImpl<TenantMapper, Tenant> impleme
                     .setLoginId(loginUserId)
                     .setState(0)
                     .setType(0)
+                    .setPassword(encode)
                     .setTenantId(tenant.getId());
             employeeMapper.insert(employee);
             /* 修改信息 */

@@ -1,0 +1,10 @@
+cn\lngex\search\config\SwaggerConfig.class
+cn\lngex\search\feign\CourseFeignFallbackFactory.class
+cn\lngex\search\config\MyResourceServerConfig.class
+cn\lngex\search\feign\CourseFeignFallbackFactory$1.class
+cn\lngex\search\controller\CourseSearchController.class
+cn\lngex\search\config\LngexRepository.class
+cn\lngex\search\SearchServerApp.class
+cn\lngex\search\doc\UserDoc.class
+cn\lngex\search\feign\CourseFeign.class
+cn\lngex\search\mapper\HighlightResultMapper.class

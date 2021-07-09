@@ -20,7 +20,7 @@ axios.interceptors.request.use(config => {
     //如果已经登录了,每次都把token作为一个请求头传递过程
     if (sessionStorage.getItem('token')) {
         // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改
-        config.headers['X-Token'] = sessionStorage.getItem('token')
+        config.headers['Authorization'] ="Bearer " + sessionStorage.getItem('token')
     }
     console.debug('config',config)
     return config
@@ -29,7 +29,7 @@ axios.interceptors.request.use(config => {
     Promise.reject(error)
 })
 //配置axios的全局基本路径
-axios.defaults.baseURL='http://localhost:1030/nb'
+axios.defaults.baseURL='http://localhost:1020/nb'
 //全局属性配置，在任意组件内可以使用this.$http获取axios对象
 Vue.prototype.$http = axios
 

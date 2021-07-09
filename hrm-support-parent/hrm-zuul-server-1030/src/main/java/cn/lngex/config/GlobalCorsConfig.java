@@ -19,6 +19,9 @@ public class GlobalCorsConfig {
         config.addAllowedOrigin("http://127.0.0.1:8081");
         config.addAllowedOrigin("http://127.0.0.1:8082");
         config.addAllowedOrigin("http://localhost:8082");
+        config.addAllowedOrigin("http://ht.lngex.cn:8081");
+        config.addAllowedOrigin("http://user.lngex.cn:8082");
+        config.addAllowedOrigin("http://www.lngex.cn");
         //2) 是否发送Cookie信息
         config.setAllowCredentials(true);
         //3) 允许的请求方式

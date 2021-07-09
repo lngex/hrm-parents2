@@ -1,0 +1,14 @@
+cn\lngex\securitydemo\handler\MyAuthenFailHandler.class
+cn\lngex\securitydemo\SecurityDemoApp.class
+cn\lngex\securitydemo\domain\Permission.class
+cn\lngex\securitydemo\controller\EmployeeController.class
+cn\lngex\securitydemo\handler\MyAuthenSucessHandler.class
+cn\lngex\securitydemo\controller\AuthController.class
+cn\lngex\securitydemo\mapper\LoginUserMapper.class
+cn\lngex\securitydemo\config\WebSecurityConfig.class
+cn\lngex\securitydemo\config\LoginUser.class
+cn\lngex\securitydemo\controller\DeptController.class
+cn\lngex\securitydemo\service\UserDetils.class
+cn\lngex\securitydemo\handler\MyAuthorSucessHandler.class
+cn\lngex\securitydemo\controller\TestController.class
+cn\lngex\securitydemo\mapper\PermissionMapper.class
